@@ -19,7 +19,6 @@ Wir sind wie folgt vorgegange: wir haben uns zuerst überlegt, wie man das Spiel
 
 ## Klassendiagram
 Die Aufteilung der Funktionen haben wir im Klassendiagram Grafisch Dargestellt.
-![Klassendiagram](https://user-images.githubusercontent.com/112378924/225028266-83e9552e-738e-4b5c-88c8-636ff7645e38.png)
 
 
 ## Retrospektive
