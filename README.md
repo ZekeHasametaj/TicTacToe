@@ -21,5 +21,7 @@ Wir sind wie folgt vorgegange: wir haben uns zuerst überlegt, wie man das Spiel
 Die Aufteilung der Funktionen haben wir im Klassendiagram Grafisch Dargestellt.
 
 
-## Retrospektive
+## Sprintreview
 Grundlegende Funktion von Tik Tak Toe umgesetzt und implementiert. Im Main haben wir ein Grid festgelegt und die Funktion für den Spielstatus programmiert. Funktionen für den Spielerwechsel nach Zug programmiert. Diagramme von letzter Woche nachgeliefert. 
+
+## Retrospektive
