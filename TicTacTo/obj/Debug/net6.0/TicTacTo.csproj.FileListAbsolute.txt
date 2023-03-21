@@ -1,0 +1,15 @@
+C:\Users\Satha\source\repos\TicTacTo\bin\Debug\net6.0\TicTacTo.exe
+C:\Users\Satha\source\repos\TicTacTo\bin\Debug\net6.0\TicTacTo.deps.json
+C:\Users\Satha\source\repos\TicTacTo\bin\Debug\net6.0\TicTacTo.runtimeconfig.json
+C:\Users\Satha\source\repos\TicTacTo\bin\Debug\net6.0\TicTacTo.dll
+C:\Users\Satha\source\repos\TicTacTo\bin\Debug\net6.0\TicTacTo.pdb
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.csproj.AssemblyReference.cache
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.AssemblyInfoInputs.cache
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.AssemblyInfo.cs
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.csproj.CoreCompileInputs.cache
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.dll
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\refint\TicTacTo.dll
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.pdb
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\TicTacTo.genruntimeconfig.cache
+C:\Users\Satha\source\repos\TicTacTo\obj\Debug\net6.0\ref\TicTacTo.dll
