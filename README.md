@@ -22,4 +22,5 @@ Die Aufteilung der Funktionen haben wir im Klassendiagram Grafisch Dargestellt.
 ![Klassendiagram](https://user-images.githubusercontent.com/112378924/225028266-83e9552e-738e-4b5c-88c8-636ff7645e38.png)
 
 
-## Use Case
+## Retrospektive
+Grundlegende Funktion von Tik Tak Toe umgesetzt und implementiert. Im Main haben wir ein Grid festgelegt und die Funktion für den Spielstatus programmiert. Funktionen für den Spielerwechsel nach Zug programmiert. Diagramme von letzter Woche nachgeliefert. 
