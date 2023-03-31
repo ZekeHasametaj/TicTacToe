@@ -4,51 +4,179 @@ namespace TicTacTo
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
-            // Game Status
-            int gameStatus = 0;
-
-            int currentPlayer = -1;
-            // dynamic Gameboard
-            char[] gameMarks = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-
-
-
+            bool playAgain = true;
             do
             {
+
+                // Game Status
+                int gameStatus = 0;
+                int currentPlayer = -1;
+                // dynamic Gameboard // Grid
+                char[] gameMarks = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+
+                string[] movesHistory = new string[9];
+                int moveIndex = -1;
+
+                do
+                {
+                    Console.Clear();
+                    currentPlayer = GetNextPLayer(currentPlayer);
+                    HeadsUpDisplay(currentPlayer);
+                    DrawGameboard(gameMarks);
+
+                    // Logic of the game
+                    bool undo = false;
+                    while (!undo)
+                    {
+                        string userInput = Console.ReadLine();
+                        Console.Clear();
+                        switch (userInput)
+                        {
+                            case "neu":
+                                gameMarks = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+                                movesHistory = new string[9];
+                                moveIndex = -1;
+                                Console.Clear();
+                                HeadsUpDisplay(currentPlayer);
+                                DrawGameboard(gameMarks);
+                                break;
+                            case "ende":
+                                return;
+                            case "undo":
+                                Console.Clear();
+                                HeadsUpDisplay(currentPlayer);
+                                DrawGameboard(gameMarks);
+                                Console.WriteLine("Change the place");
+                                if (moveIndex >= 0)
+                                {
+                                    gameMarks = UndoMove(movesHistory[moveIndex--], gameMarks, ref moveIndex);
+                                }
+                                break;
+                            default:
+                                if (!string.IsNullOrEmpty(userInput) &&
+                                    (userInput.Equals("1") ||
+                                     userInput.Equals("2") ||
+                                     userInput.Equals("3") ||
+                                     userInput.Equals("4") ||
+                                     userInput.Equals("5") ||
+                                     userInput.Equals("6") ||
+                                     userInput.Equals("7") ||
+                                     userInput.Equals("8") ||
+                                     userInput.Equals("9")))
+                                {
+                                    int.TryParse(userInput, out var gamePlacementMarker);
+
+                                    char currentMarker = gameMarks[gamePlacementMarker - 1];
+
+                                    // if field is already been placed
+                                    if (currentMarker.Equals('X') || currentMarker.Equals('O'))
+                                    {
+                                        HeadsUpDisplay(currentPlayer);
+                                        DrawGameboard(gameMarks);
+                                        Console.WriteLine("PLacement has already a marker please select another placement.");
+                                    }
+                                    else
+                                    {
+                                        // place the symbol and change the player
+                                        char playerMarker = GetPlayerMarker(currentPlayer);
+                                        gameMarks[gamePlacementMarker - 1] = playerMarker;
+                                        movesHistory[++moveIndex] = $"{gamePlacementMarker},{playerMarker}";
+                                        undo = true;
+                                    }
+                                }
+                                else
+                                {
+                                    // Error statement if somebody gives a invalid value
+                                    Console.Clear();
+                                    HeadsUpDisplay(currentPlayer);
+                                    DrawGameboard(gameMarks);
+                                    Console.WriteLine("Invalid Value, PLEES change the Value");
+                                }
+                                break;
+                        }
+                    }
+
+                    gameStatus = CheckWinner(gameMarks);
+                } while (gameStatus.Equals(0));
+
                 Console.Clear();
-                currentPlayer = GetNextPLayer(currentPlayer);
                 HeadsUpDisplay(currentPlayer);
                 DrawGameboard(gameMarks);
 
-                // Logic of the game
-                GameEngine(gameMarks, currentPlayer);
-                /*string userInput = Console.ReadLine();
-                Console.Clear();*/
+                if (gameStatus.Equals(1))
+                {
+                    Console.WriteLine($"Player: {currentPlayer} is the Winner");
+                    Console.WriteLine("If you want to play again write neu. If you want to end the game write ende!");
+                    string userInput2 = Console.ReadLine();
+                    if (userInput2 == "ende")
+                    {
+                        playAgain = false;
+                    }
+                    if (userInput2 == "neu")
+                    {
+                        gameMarks = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+                        movesHistory = new string[9];
+                        moveIndex = -1;
+                        Console.Clear();
+                        HeadsUpDisplay(currentPlayer);
+                        DrawGameboard(gameMarks);
+                    }
+                    if (userInput2 != "ende" && userInput2 != "neu")
+                    {
+                        Console.WriteLine("Invalid Value, PLEES change the Value");
+                    }
 
-                gameStatus = CheckWinner(gameMarks);
-            } while (gameStatus.Equals(0));
-
-            if (gameStatus.Equals(1))
-            {
-                Console.Clear();
-                HeadsUpDisplay(currentPlayer);
-                DrawGameboard(gameMarks);
-                Console.WriteLine($"Player: {currentPlayer} is the Winner");
-            }
-            if (gameStatus.Equals(2))
-            {
-                Console.Clear();
-                HeadsUpDisplay(currentPlayer);
-                DrawGameboard(gameMarks);
-                Console.WriteLine("The Game is Draw!");
-            }
+                }
+                if (gameStatus.Equals(2))
+                {
+                    Console.WriteLine("The Game is Draw!");
+                    Console.WriteLine("If you want to play again write neu. If you want to end the game write ende!");
+                    string userInput2 = Console.ReadLine();
+                    if (userInput2 == "ende")
+                    {
+                        playAgain = false;
+                    }
+                    if (userInput2 == "neu")
+                    {
+                        gameMarks = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+                        movesHistory = new string[9];
+                        moveIndex = -1;
+                        Console.Clear();
+                        HeadsUpDisplay(currentPlayer);
+                        DrawGameboard(gameMarks);
+                    }
+                    if (userInput2 != "ende" && userInput2 != "neu")
+                    {
+                        Console.WriteLine("Invalid Value, PLEES change the Value");
+                    }
+                }
+            } while (playAgain);
+            Console.WriteLine("See you later :)");
         }
+
+        private static char[] UndoMove(string move, char[] gameMarks, ref int moveIndex)
+{
+    if (moveIndex < 0)
+    {
+        // no previous moves to undo
+        return gameMarks;
+    }
+
+    var parts = move.Split(',');
+    int gamePlacementMarker = int.Parse(parts[0]);
+    gameMarks[gamePlacementMarker - 1] = char.Parse(parts[1]) == 'X' ? 'O' : 'X';
+
+    // decrement the move index to undo only the last move
+    moveIndex--;
+
+    return gameMarks;
+}
 
         private static int CheckWinner(char[] gameMarks)
         {
-
             // Game is a Draw
             if (IsGameDraw(gameMarks))
             {
@@ -66,6 +194,7 @@ namespace TicTacTo
 
         private static bool IsGameDraw(char[] gameMarks)
         {
+            // placed field to have a Draw
             return gameMarks[0] != '1' &&
                    gameMarks[1] != '2' &&
                    gameMarks[2] != '3' &&
@@ -115,16 +244,20 @@ namespace TicTacTo
             return false;
         }
 
-        private static bool IsGameMMarksTheSame(char[] testGameMarkers, int pos1, int pos2, int pos3) 
+        private static bool IsGameMMarksTheSame(char[] testGameMarkers, int pos1, int pos2, int pos3)
         {
+            // Board position replacing
             return testGameMarkers[pos1].Equals(testGameMarkers[pos2]) && testGameMarkers[pos2].Equals(testGameMarkers[pos3]);
         }
+
         private static void GameEngine(char[] gameMarks, int currentPlayer)
         {
+            // check witch players turn
             bool notValidMove = true;
 
             do
             {
+                // players input
                 string userInput = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(userInput) &&
@@ -138,24 +271,30 @@ namespace TicTacTo
                     userInput.Equals("8") ||
                     userInput.Equals("9")))
                 {
+                    // because if i don't the the display will double
                     Console.Clear();
 
                     int.TryParse(userInput, out var gamePlacementMarker);
 
                     char currentMarker = gameMarks[gamePlacementMarker - 1];
 
+                    // if field is already been placed
                     if (currentMarker.Equals('X') || currentMarker.Equals('O'))
                     {
+                        HeadsUpDisplay(currentPlayer);
+                        DrawGameboard(gameMarks);
                         Console.WriteLine("PLacement has already a marker please select another placement.");
                     }
                     else
                     {
+                        // place the symbol and change the player
                         gameMarks[gamePlacementMarker - 1] = GetPlayerMarker(currentPlayer);
                         notValidMove = false;
                     }
                 }
                 else
                 {
+                    // Error statement if somebody gives a invalid value
                     Console.WriteLine("Invalid Value, PLEES change the Value");
                 }
             } while (notValidMove);
@@ -172,7 +311,7 @@ namespace TicTacTo
             return 'X';
         }
 
-        static void HeadsUpDisplay( int PlayerNumber)
+        static void HeadsUpDisplay(int PlayerNumber)
         {
             // Introduction
             Console.WriteLine("Welcome to the Tic Tac Toe Game!");
@@ -200,7 +339,7 @@ namespace TicTacTo
         // Changing Player
         static int GetNextPLayer(int player)
         {
-            if (player.Equals(1)) 
+            if (player.Equals(1))
             {
                 return 2;
             }
@@ -209,3 +348,4 @@ namespace TicTacTo
         }
     }
 }
+
