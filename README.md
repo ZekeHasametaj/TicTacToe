@@ -21,6 +21,8 @@
     - [Review](#review-2)
     - [Retrospektive](#retrospektive-2)
 - [Dokumentation](#dokumentation-code)
+    - [Mein Main Code](#mein-main-code)
+    - [Testing Code](#testing-code)
 
 # Aufgabe
 Die Aufgabe war es ein Tik Tak Toe Spiel in C# umzusetzen wo man den Letzten Spielzug Rückgängig machen kann, das Spiel Beenden kann, ein neues Spiel starten kann und Tik Tak Toe nach den standard Regeln des Klassikers spielen kann.
